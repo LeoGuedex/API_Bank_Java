@@ -12,7 +12,7 @@
 	<artifactId>JavaBank</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>JavaBank</name>
-	<description>Banco feito em Java</description>
+	<description>Java bank with Java 11</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
