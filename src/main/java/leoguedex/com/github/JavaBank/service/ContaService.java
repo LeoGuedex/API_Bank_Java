@@ -50,7 +50,7 @@ public class ContaService {
     }
     conta.setSaldoAtual(conta.getSaldoAtual() - valor);
     conta.setExtratoBancario(
-        "Saque    de R$ " + valor + ", realizado no dia " + LocalDateTime.now().format(
+        "Saque     de R$ " + valor + ", realizado no dia " + LocalDateTime.now().format(
             DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss")));
     contaRepository.save(conta);
   }
