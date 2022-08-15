@@ -59,4 +59,7 @@ public class Conta {
     this.dataCriacao = LocalDateTime.now();
   }
 
+  public void setExtratoBancario(String extratoBancario) {
+    this.extratoBancario.add(extratoBancario);
+  }
 }
