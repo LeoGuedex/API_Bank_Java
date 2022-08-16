@@ -56,20 +56,27 @@ public class ContaService {
   }
 
   public void transferenciaEntreContas(Conta contaOrigem, Conta contaDestino, Double valor) {
-    if(contaOrigem.getSaldoAtual() - valor <= 0){
+    if (contaOrigem.getSaldoAtual() - valor <= 0) {
       throw new RuntimeException("Impossivel sacar mais que o valor existente");
     }
     contaOrigem.setSaldoAtual(contaOrigem.getSaldoAtual() - valor);
-    contaOrigem.setExtratoBancario("Transferencia ENVIADA  no valor de R$ " + valor + " para " + contaDestino.getCliente().getNome());
+    contaOrigem.setExtratoBancario(
+        "Transferencia ENVIADA  no valor de R$ " + valor + " para " + contaDestino.getCliente()
+            .getNome());
 
     contaDestino.setSaldoAtual(contaDestino.getSaldoAtual() + valor);
-    contaDestino.setExtratoBancario("Transferencia RECEBIDA no valor de R$ " + valor + " de " + contaOrigem.getCliente().getNome());
+    contaDestino.setExtratoBancario(
+        "Transferencia RECEBIDA no valor de R$ " + valor + " de " + contaOrigem.getCliente()
+            .getNome());
     contaRepository.save(contaDestino);
     contaRepository.save(contaOrigem);
   }
 
   public Conta fromDtoConta(ClienteDto clienteDto) {
-    return new Conta(0.0, "Conta Criada no dia " + LocalDate.now(), clienteDto.getTipoConta());
+    return new Conta(
+        0.0,
+        "Conta Criada no dia " + LocalDate.now(),
+        clienteDto.getTipoConta());
   }
 
 }

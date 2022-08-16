@@ -32,11 +32,11 @@ public class DBService {
     clienteRepository.save(cli2);
     clienteRepository.save(cli3);
 
-    Conta conta1 = new Conta(null, 0.0, "Conta Criada no dia" + LocalDateTime.now(),
+    Conta conta1 = new Conta(null, 0.0, "Conta Criada no dia " + LocalDateTime.now(),
         TipoConta.CONTA_SALARIO, cli1);
-    Conta conta2 = new Conta(null, 0.0, "Conta Criada no dia" + LocalDateTime.now(),
+    Conta conta2 = new Conta(null, 0.0, "Conta Criada no dia " + LocalDateTime.now(),
         TipoConta.CONTA_CORRENTE, cli2);
-    Conta conta3 = new Conta(null, 0.0, "Conta Criada no dia" + LocalDateTime.now(),
+    Conta conta3 = new Conta(null, 0.0, "Conta Criada no dia " + LocalDateTime.now(),
         TipoConta.CONTA_POUPANCA, cli3);
 
     contaRepository.save(conta1);
