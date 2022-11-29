@@ -1,6 +1,4 @@
-package leoguedex.com.github.JavaBank.exception;
-
-import org.springframework.http.HttpStatus;
+package leoguedex.com.github.JavaBank.model.dto.exception;
 
 public class DataIntegratyException extends RuntimeException {
 

@@ -2,9 +2,12 @@ package leoguedex.com.github.JavaBank.service;
 
 import java.text.ParseException;
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import leoguedex.com.github.JavaBank.model.Cartao;
 import leoguedex.com.github.JavaBank.model.Cliente;
 import leoguedex.com.github.JavaBank.model.Conta;
 import leoguedex.com.github.JavaBank.model.enums.TipoConta;
+import leoguedex.com.github.JavaBank.repository.CartaoRepository;
 import leoguedex.com.github.JavaBank.repository.ClienteRepository;
 import leoguedex.com.github.JavaBank.repository.ContaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,12 @@ public class DBService {
 
   @Autowired
   private ContaService contaService;
+
+  @Autowired
+  private CartaoRepository cartaoRepository;
+
+  public DBService() {
+  }
 
   public void instantiateDatabase() throws ParseException {
 
@@ -81,6 +90,26 @@ public class DBService {
     contaService.transferenciaEntreContas(conta2, conta3, 1.0);
     contaService.transferenciaEntreContas(conta3, conta1, 2.25);
     contaService.transferenciaEntreContas(conta1, conta2, 3.32);
-  }
 
+    Cartao cartao1 = new Cartao(conta1);
+    Cartao cartao2 = new Cartao(conta1);
+    Cartao cartao3 = new Cartao(conta1);
+    Cartao cartao4 = new Cartao(conta2);
+    Cartao cartao5 = new Cartao(conta2);
+    Cartao cartao6 = new Cartao(conta2);
+    Cartao cartao7 = new Cartao(conta3);
+    Cartao cartao8 = new Cartao(conta3);
+    Cartao cartao9 = new Cartao(conta3);
+
+    cartaoRepository.saveAll(Arrays.asList(cartao1,cartao2,cartao3));
+    cartaoRepository.saveAll(Arrays.asList(cartao4,cartao5,cartao6));
+    cartaoRepository.saveAll(Arrays.asList(cartao7,cartao8,cartao9));
+
+    conta1.setCartao(Arrays.asList(cartao1,cartao2,cartao3));
+    conta2.setCartao(Arrays.asList(cartao4,cartao5,cartao6));
+    conta3.setCartao(Arrays.asList(cartao7,cartao8,cartao9));
+    contaRepository.saveAll(Arrays.asList(conta1,conta2,conta3));
+
+
+  }
 }

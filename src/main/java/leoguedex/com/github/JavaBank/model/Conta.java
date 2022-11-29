@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import leoguedex.com.github.JavaBank.model.enums.TipoConta;
@@ -51,6 +52,9 @@ public class Conta {
   @JoinColumn(name = "cliente_id")
   private Cliente cliente;
 
+  @OneToMany(mappedBy = "conta")
+  private List<Cartao> cartao;
+
   public Conta(Double saldoAtual, String extratoBancario, Integer tipoConta) {
     Random random = new Random();
     this.saldoAtual = saldoAtual;
@@ -62,7 +66,7 @@ public class Conta {
             + random.nextInt(9999);
     this.agencia = random.nextInt(9999);
   }
-
+  //parei
   public Conta(Integer id, Double saldoAtual, String extratoBancario, TipoConta tipoConta,
       Cliente cliente) {
     Random random = new Random();
@@ -81,4 +85,5 @@ public class Conta {
   public void setExtratoBancario(String extratoBancario) {
     this.extratoBancario.add(extratoBancario);
   }
+
 }

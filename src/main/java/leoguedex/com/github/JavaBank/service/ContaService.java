@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
-import leoguedex.com.github.JavaBank.exception.DataIntegratyException;
-import leoguedex.com.github.JavaBank.exception.ObjetoNaoEncontrado;
+import leoguedex.com.github.JavaBank.model.dto.exception.DataIntegratyException;
+import leoguedex.com.github.JavaBank.model.dto.exception.ObjetoNaoEncontradoException;
 import leoguedex.com.github.JavaBank.model.Conta;
 import leoguedex.com.github.JavaBank.model.dto.ClienteDto;
 import leoguedex.com.github.JavaBank.repository.ContaRepository;
@@ -22,7 +22,7 @@ public class ContaService {
   public Conta findConta(Integer id) {
     Optional<Conta> conta = contaRepository.findById(id);
     return conta.orElseThrow(
-        () -> new ObjetoNaoEncontrado("Objeto Não Encontrado! Id: " + id + ", tipo: "
+        () -> new ObjetoNaoEncontradoException("Objeto Não Encontrado! Id: " + id + ", tipo: "
             + Conta.class.getName()));
   }
 
@@ -46,7 +46,7 @@ public class ContaService {
 
   public void sacar(Conta conta, Double valor) {
     if (conta.getSaldoAtual() - valor < 0.0) {
-      throw new RuntimeException("Impossivel transferir mais que o valor existente");
+      throw new RuntimeException("Impossivel sacar mais que o valor existente");
     }
     conta.setSaldoAtual(conta.getSaldoAtual() - valor);
     conta.setExtratoBancario(

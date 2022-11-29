@@ -3,8 +3,8 @@ package leoguedex.com.github.JavaBank.service;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
-import leoguedex.com.github.JavaBank.exception.DataIntegratyException;
-import leoguedex.com.github.JavaBank.exception.ObjetoNaoEncontrado;
+import leoguedex.com.github.JavaBank.model.dto.exception.DataIntegratyException;
+import leoguedex.com.github.JavaBank.model.dto.exception.ObjetoNaoEncontradoException;
 import leoguedex.com.github.JavaBank.model.Cliente;
 import leoguedex.com.github.JavaBank.model.Conta;
 import leoguedex.com.github.JavaBank.model.dto.ClienteDto;
@@ -35,7 +35,7 @@ public class ClienteService {
   public Cliente findCliente(Integer id) {
     Optional<Cliente> cliente = clienteRepository.findById(id);
     return cliente.orElseThrow(
-        () -> new ObjetoNaoEncontrado("Objeto Não Encontrado! Id: " + id + ", tipo: "
+        () -> new ObjetoNaoEncontradoException("Objeto Não Encontrado! Id: " + id + ", tipo: "
             + Cliente.class.getName()));
   }
 
@@ -63,7 +63,8 @@ public class ClienteService {
   }
 
   public Cliente updateFromDto(ClienteRequestDto requestDto) {
-    return new Cliente(null, requestDto.getNome(), null, requestDto.getEmail(),
+    return new Cliente(null, requestDto.getNome(), null,
+            requestDto.getEmail(),
         requestDto.getSenha(), null);
   }
 

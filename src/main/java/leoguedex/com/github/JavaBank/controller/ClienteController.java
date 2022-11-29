@@ -3,7 +3,7 @@ package leoguedex.com.github.JavaBank.controller;
 import java.net.URI;
 import java.util.List;
 import javax.validation.Valid;
-import leoguedex.com.github.JavaBank.exception.DataIntegratyException;
+
 import leoguedex.com.github.JavaBank.model.Cliente;
 import leoguedex.com.github.JavaBank.model.Conta;
 import leoguedex.com.github.JavaBank.model.dto.ClienteDto;
@@ -11,14 +11,12 @@ import leoguedex.com.github.JavaBank.model.dto.ClienteRequestDto;
 import leoguedex.com.github.JavaBank.service.ClienteService;
 import leoguedex.com.github.JavaBank.service.ContaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.HttpServerErrorException.InternalServerError;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
@@ -38,9 +36,10 @@ public class ClienteController {
     cliente.setConta(conta);
     conta.setCliente(cliente);
     clienteService.insert(cliente, conta);
-    URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-        .buildAndExpand(cliente.getId()).toUri();
-    return ResponseEntity.created(uri).build();
+//    URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cliente.getId()).toUri();
+    URI url = ServletUriComponentsBuilder.fromCurrentRequest()
+            .path("/{id}").buildAndExpand(cliente.getId()).toUri();
+    return ResponseEntity.created(url).build();
   }
 
   @RequestMapping(value = "/{id}", method = RequestMethod.GET)
